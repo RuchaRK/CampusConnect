@@ -8,8 +8,8 @@
     "install-all": "concurrently \"npm run install:frontend\" \"npm run install:backend\" ",
     "install:frontend": "cd frontend && npm install",
     "install:backend": "cd server && npm install",
-    "start": "concurrently \"npm run frontend\" \"npm run backend\"",
-    "start:frontend": "cd frontend && npm start",
+    "start": "npm run start:frontend",
+    "start:frontend": "cd frontend && npm run dev",
     "start:backend": "cd server && npm start"
   },
   "keywords": [],
