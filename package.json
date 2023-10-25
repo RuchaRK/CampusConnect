@@ -1,0 +1,24 @@
+{
+  "name": "campusconnect",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "install-all": "concurrently \"npm run install:frontend\" \"npm run install:backend\" ",
+    "install:frontend": "cd frontend && npm install",
+    "install:backend": "cd server && npm install",
+    "start": "concurrently \"npm run frontend\" \"npm run backend\"",
+    "start:frontend": "cd frontend && npm start",
+    "start:backend": "cd server && npm start"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "concurrently": "^8.2.1"
+  },
+  "dependencies": {
+    "all": "^0.0.0"
+  }
+}
