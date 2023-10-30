@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 import { TbTargetArrow } from 'react-icons/tb';
 import { RiDashboardFill } from 'react-icons/ri';
-import { MdOutlineFitnessCenter } from 'react-icons/md';
+import { PiStudentFill, PiChalkboardTeacherFill } from 'react-icons/pi';
 import { BiLogOut, BiSolidNotepad } from 'react-icons/bi';
 import { NavLink } from 'react-router-dom';
 import { routeName } from '../App.routes';
@@ -16,7 +16,9 @@ const SideBarComponent = styled.div`
   height: 100%;
   width: 100%;
   background: #fff;
-  box-shadow: 0px 5px 22px 4px rgba(0, 0, 0, 0.02), 0px 12px 17px 2px rgba(0, 0, 0, 0.03);
+  box-shadow:
+    0px 5px 22px 4px rgba(0, 0, 0, 0.02),
+    0px 12px 17px 2px rgba(0, 0, 0, 0.03);
 `;
 
 const Header = styled.div`
@@ -51,19 +53,14 @@ const menu = [
     icon: <RiDashboardFill />
   },
   {
-    route: routeName.EXERCISE,
-    label: 'Workout',
-    icon: <MdOutlineFitnessCenter />
+    route: routeName.STUDENT,
+    label: 'Student',
+    icon: <PiStudentFill />
   },
   {
-    route: routeName.FOOD,
-    label: 'Diet Plan',
-    icon: <BiSolidNotepad />
-  },
-  {
-    route: routeName.GOALS,
-    label: 'Goals',
-    icon: <TbTargetArrow />
+    route: routeName.TEACHER,
+    label: 'Teacher',
+    icon: <PiChalkboardTeacherFill />
   }
 ];
 
@@ -72,7 +69,7 @@ export const SideBar = () => {
     <SideBarComponent>
       <div style={{ display: 'flex', flexDirection: 'column', gap: '24px', width: '100%' }}>
         <Header>
-          <h1 style={{ fontSize: '18px' }}>Fitness</h1>
+          <h1 style={{ fontSize: '18px' }}>CampusConnect</h1>
         </Header>
 
         <PagesContainer>

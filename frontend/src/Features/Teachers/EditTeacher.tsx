@@ -1,9 +1,10 @@
 import * as React from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { TeacherModal } from './TeacherModal';
 import { updateTeacher } from '../../Reducer/teacherSlice';
+import { BiEdit } from 'react-icons/bi';
 
-export const TeacherRow = ({ objectToShow }) => {
+export const EditTeacher = ({ objectToShow }) => {
   const dispatch = useDispatch();
 
   const [editModal, setEditModal] = React.useState(false);
@@ -22,12 +23,9 @@ export const TeacherRow = ({ objectToShow }) => {
 
   return (
     <div key={objectToShow.postID}>
-      <p>{objectToShow.name}</p>
-      <p> {objectToShow.subject}</p>
-      <p>{objectToShow.contactNumber}</p>
-      <p> {objectToShow.address}</p>
-      <button onClick={openEditModal}>Update Details</button>
-
+      <button onClick={openEditModal}>
+        <BiEdit />
+      </button>
       <TeacherModal
         modalIsOpen={editModal}
         closeModal={closeEditModal}

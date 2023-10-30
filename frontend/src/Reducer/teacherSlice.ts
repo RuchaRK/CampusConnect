@@ -6,8 +6,8 @@ export const fetchTeachers = createAsyncThunk('teachers/fetchTeachers', async ()
   return response.data?.allTeachers;
 });
 
-export const fetchATeacher = createAsyncThunk('teacher/fetchATeacher', async () => {
-  const response = await axios.get('/api/teachers/:teacherId');
+export const fetchATeacher = createAsyncThunk('teacher/fetchATeacher', async (id) => {
+  const response = await axios.get(`/api/teachers/${id}`);
   return response.data?.teacher;
 });
 
@@ -16,8 +16,8 @@ export const addNewTeacher = createAsyncThunk('teachers/addTeacher', async (newT
   return response.data?.allTeachers;
 });
 
-export const deleteTeacher = createAsyncThunk('teachers/deleteTeacher', async () => {
-  const response = await axios.delete('/api/teachers/:teacherId');
+export const deleteTeacher = createAsyncThunk('teachers/deleteTeacher', async (id) => {
+  const response = await axios.delete(`/api/teachers/${id}`);
   return response.data?.allTeachers;
 });
 

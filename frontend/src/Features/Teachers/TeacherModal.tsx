@@ -1,57 +1,69 @@
-import { useState } from 'react';
-import Modal from 'react-modal';
+import { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
+import { Model } from '../../Components/Model';
+import { ButtonContainer, FormContainer, Input, Title } from '../../Components/Model.styles';
 
 export const TeacherModal = ({ modalIsOpen, closeModal, handleSubmit, initialState }) => {
   const [formInput, setFormInput] = useState(initialState ? initialState : {});
+  const { wizardStatus } = useSelector((state) => state.teachers);
 
   const saveFormDetails = (event) => {
     setFormInput({ ...formInput, [event.target.name]: event.target.value });
   };
 
+  useEffect(() => {
+    if (wizardStatus === 'success') {
+      closeModal();
+    }
+  }, [wizardStatus]);
+
   return (
     <div>
-      <Modal isOpen={modalIsOpen} onRequestClose={closeModal}>
-        <div>Add new Teacher</div>
-        <form>
+      <Model isOpen={modalIsOpen} onRequestClose={closeModal}>
+        <FormContainer>
+          <Title>New Food</Title>
           Name:
-          <input
+          <Input
             type="text"
             name="name"
             value={formInput.name}
             onChange={(event) => saveFormDetails(event)}
           />
           Subject:
-          <input
+          <Input
             type="text"
             name="subject"
             value={formInput.subject}
             onChange={(event) => saveFormDetails(event)}
           />
           Address:
-          <input
+          <Input
             type="text"
             name="address"
             value={formInput.address}
             onChange={(event) => saveFormDetails(event)}
           />
           contactNumber:
-          <input
+          <Input
             type="number"
             name="contactNumber"
             value={formInput.contactNumber}
             onChange={(event) => saveFormDetails(event)}
           />
-          <button
-            onClick={(e) => {
-              e.preventDefault();
-              handleSubmit(formInput);
-              closeModal();
-            }}>
-            Submit
-          </button>
-        </form>
-        <button onClick={closeModal}>close</button>
-      </Modal>
+          <ButtonContainer>
+            <button
+              disabled={wizardStatus === 'loading'}
+              onClick={(e) => {
+                e.preventDefault();
+                handleSubmit(formInput);
+                closeModal();
+              }}>
+              {wizardStatus === 'loading' ? 'Submitting...' : 'Submit'}
+            </button>
+            <button onClick={closeModal}>close</button>
+          </ButtonContainer>
+        </FormContainer>
+      </Model>
     </div>
   );
 };

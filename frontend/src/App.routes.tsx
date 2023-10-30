@@ -1,6 +1,5 @@
 export const routeName = {
   DashBoard: '/',
-  EXERCISE: '/exercise',
-  FOOD: '/food',
-  GOALS: '/goals'
+  STUDENT: '/student',
+  TEACHER: '/teacher'
 };
