@@ -1,9 +1,10 @@
 import * as React from 'react';
 import { useDispatch } from 'react-redux';
-import { StudentModal } from '../../Features/Students/StudentModal';
+import { BiEdit } from 'react-icons/bi';
 import { updateStudent } from '../../Reducer/studentSlice';
+import { StudentModal } from './StudentModal';
 
-export const StudentRow = ({ objectToShow }) => {
+export const EditStudent = ({ objectToShow }) => {
   const dispatch = useDispatch();
 
   const [editModal, setEditModal] = React.useState(false);
@@ -21,16 +22,10 @@ export const StudentRow = ({ objectToShow }) => {
   };
 
   return (
-    <div key={objectToShow.postID}>
-      <p>{objectToShow.name}</p>
-      <p> {objectToShow.age}</p>
-      <p>{objectToShow.grade}</p>
-      <p> {objectToShow.gender}</p>
-      <p>{objectToShow.attendance} </p>
-      <p>{objectToShow.percentage}</p>
-
-      <button onClick={openEditModal}>Update Details</button>
-
+    <div key={objectToShow._id}>
+      <button onClick={openEditModal}>
+        <BiEdit />
+      </button>
       <StudentModal
         modalIsOpen={editModal}
         closeModal={closeEditModal}
