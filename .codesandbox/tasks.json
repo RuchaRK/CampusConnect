@@ -12,10 +12,6 @@
     {
       "name": "install frontend",
       "command": "cd frontend && npm install"
-    },
-    {
-      "name": "Start Backend",
-      "command": "npm run start:backend"
     }
   ],
 
