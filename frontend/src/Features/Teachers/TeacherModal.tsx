@@ -21,7 +21,7 @@ export const TeacherModal = ({ modalIsOpen, closeModal, handleSubmit, initialSta
     <div>
       <Model isOpen={modalIsOpen} onRequestClose={closeModal}>
         <FormContainer>
-          <Title>New Food</Title>
+          <Title>New Teacher</Title>
           Name:
           <Input
             type="text"

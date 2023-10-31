@@ -20,7 +20,7 @@ export const StudentModal = ({ modalIsOpen, closeModal, handleSubmit, initialSta
   return (
     <div>
       <Model isOpen={modalIsOpen} onRequestClose={closeModal} contentLabel="Example Modal">
-        <Title>Add new Student</Title>
+        <Title>Add New Student</Title>
         <FormContainer>
           Name:
           <Input
