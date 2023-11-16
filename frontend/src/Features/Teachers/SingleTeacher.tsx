@@ -29,18 +29,18 @@ const DataContainer = styled.div`
 
 export const SingleTeacher = () => {
   const { id } = useParams();
-  const [singleVolunteer, setSingleVolunteer] = React.useState(null);
+  const [singleTeacher, setSingleTeacher] = React.useState(null);
 
   const fetchATeacher = async (id) => {
     const response = await axios.get(`/api/teachers/${id}`);
-    return response.data?.teacher;
+    return setSingleTeacher(response.data?.teacher);
   };
 
   React.useEffect(() => {
     fetchATeacher(id);
   }, []);
 
-  console.log('Volunteer to see', singleVolunteer);
+  console.log('Teacher to see', singleTeacher);
 
   const wardToDisplay = singleVolunteer?.assignedEvents
     .map((volunteer) => volunteer.eventName)
