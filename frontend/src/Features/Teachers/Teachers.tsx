@@ -44,29 +44,28 @@ export const Teachers = () => {
 
   return (
     <div>
-      <ListPage
-        column={['name', 'subject', 'contactNumber', 'address', '']}
-        data={teachers.map((teacher) => [
-          teacher.name,
-          teacher.subject,
-          teacher.contactNumber,
-          teacher.address,
-          <EditTeacher objectToShow={teacher} />,
-          <button onClick={() => deleteTeacherById(teacher._id)}>
-            <AiOutlineDelete />
-          </button>
-        ])}
-        title="Lets start by burning some calories!!!"
-        description="Don't wish for a good body, work for it..."
-        image=""
-        openForm={openModal}
-      />
-      <TeacherModal
-        modalIsOpen={modalIsOpen}
-        closeModal={closeModal}
-        handleSubmit={addTeacher}
-        initialState={{}}
-      />
+      {status === 'loading' && <p>Loading...</p>}
+      {error && <p>Something is wrong {error}</p>}
+      <div>
+        <ListPage
+          column={['Name', 'Subject', 'Contact Number', 'Address']}
+          data={teachers.map((teacher) => [
+            teacher.name,
+            teacher.subject,
+            teacher.contactNumber,
+            teacher.address,
+            <EditTeacher objectToShow={teacher} />,
+            <button onClick={() => deleteTeacherById(teacher._id)}>
+              <AiOutlineDelete />
+            </button>
+          ])}
+          title="Teachers"
+          description=""
+          image=""
+          openForm={openModal}
+        />
+        <TeacherModal modalIsOpen={modalIsOpen} closeModal={closeModal} handleSubmit={addTeacher} />
+      </div>
     </div>
   );
 };

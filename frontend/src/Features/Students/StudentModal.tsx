@@ -28,22 +28,25 @@ export const StudentModal = ({ modalIsOpen, closeModal, handleSubmit, initialSta
             value={formInput.age}
             onChange={(event) => saveFormDetails(event)}
           />
-          <input
-            type="radio"
-            name="gender"
-            value="Male"
-            checked={formInput ?? formInput.gender === 'Male'}
-            onChange={(event) => saveFormDetails(event)}
-          />
-          Male
-          <input
-            type="radio"
-            name="gender"
-            value="Female"
-            checked={formInput ?? formInput.gender === 'Female'}
-            onChange={(event) => saveFormDetails(event)}
-          />
-          Female Grade:
+          <div>
+            <input
+              type="radio"
+              name="gender"
+              value="Male"
+              checked={formInput ?? formInput.gender === 'Male'}
+              onChange={(event) => saveFormDetails(event)}
+            />
+            Male
+            <input
+              type="radio"
+              name="gender"
+              value="Female"
+              checked={formInput ?? formInput.gender === 'Female'}
+              onChange={(event) => saveFormDetails(event)}
+            />
+            Female
+          </div>
+          Grade:
           <input
             type="number"
             name="grade"

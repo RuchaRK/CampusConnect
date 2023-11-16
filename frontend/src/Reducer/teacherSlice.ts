@@ -53,18 +53,6 @@ export const teacherSlice = createSlice({
 
       state.error = action.error.message;
     },
-    [fetchATeacher.pending]: (state) => {
-      state.status = 'loading';
-    },
-    [fetchATeacher.fulfilled]: (state, action) => {
-      state.status = 'success';
-      state.teacher = action.payload;
-    },
-    [fetchATeacher.rejected]: (state, action) => {
-      state.status = 'error';
-
-      state.error = action.error.message;
-    },
     [addNewTeacher.pending]: (state) => {
       state.wizardStatus = 'loading';
     },

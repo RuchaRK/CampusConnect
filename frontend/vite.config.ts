@@ -8,7 +8,7 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {
-        target: 'https://yrq7dy-3001.csb.app/',
+        target: 'http://localhost:3001',
         changeOrigin: true,
         secure: false,
         ws: true

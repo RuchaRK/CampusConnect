@@ -8,7 +8,7 @@ export const fetchStudents = createAsyncThunk('students/fetchStudents', async ()
 
 export const fetchAStudent = createAsyncThunk('students/fetchAStudent', async () => {
   const response = await axios.get('/api/students/:studentId');
-  return response.data?.allStudents;
+  return response.data?.studentDetails;
 });
 
 export const addStudent = createAsyncThunk('students/addStudent', async (newStudent) => {
@@ -16,8 +16,8 @@ export const addStudent = createAsyncThunk('students/addStudent', async (newStud
   return response.data?.allStudents;
 });
 
-export const deleteStudent = createAsyncThunk('/students/deleteStudent', async () => {
-  const response = await axios.delete('/api/students/:studentId');
+export const deleteStudent = createAsyncThunk('/students/deleteStudent', async (id) => {
+  const response = await axios.delete(`/api/students/${id}`);
   return response.data?.allStudents;
 });
 
