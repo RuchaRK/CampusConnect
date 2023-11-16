@@ -6,11 +6,6 @@ export const fetchStudents = createAsyncThunk('students/fetchStudents', async ()
   return response.data?.allStudents;
 });
 
-export const fetchAStudent = createAsyncThunk('students/fetchAStudent', async () => {
-  const response = await axios.get('/api/students/:studentId');
-  return response.data?.studentDetails;
-});
-
 export const addStudent = createAsyncThunk('students/addStudent', async (newStudent) => {
   const response = await axios.post('/api/students', newStudent);
   return response.data?.allStudents;
@@ -50,18 +45,6 @@ export const studentSlice = createSlice({
       state.students = action.payload;
     },
     [fetchStudents.rejected]: (state, action) => {
-      state.status = 'error';
-      console.log(action.error.message);
-      state.error = action.error.message;
-    },
-    [fetchAStudent.pending]: (state) => {
-      state.status = 'loading';
-    },
-    [fetchAStudent.fulfilled]: (state, action) => {
-      state.status = 'success';
-      state.student = action.payload;
-    },
-    [fetchAStudent.rejected]: (state, action) => {
       state.status = 'error';
       console.log(action.error.message);
       state.error = action.error.message;

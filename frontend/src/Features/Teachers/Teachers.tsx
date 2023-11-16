@@ -7,6 +7,7 @@ import { fetchTeachers, addNewTeacher, deleteTeacher } from '../../Reducer/teach
 import { TeacherModal } from './TeacherModal';
 import { EditTeacher } from './EditTeacher';
 import { AiOutlineDelete } from 'react-icons/ai';
+import { Link } from 'react-router-dom';
 
 export const Teachers = () => {
   const dispatch = useDispatch();
@@ -50,7 +51,7 @@ export const Teachers = () => {
         <ListPage
           column={['Name', 'Subject', 'Contact Number', 'Address']}
           data={teachers.map((teacher) => [
-            teacher.name,
+            <Link to={teacher._id}>{teacher.name}</Link>,
             teacher.subject,
             teacher.contactNumber,
             teacher.address,

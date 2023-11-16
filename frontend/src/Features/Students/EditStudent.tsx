@@ -3,7 +3,6 @@ import { BiEdit } from 'react-icons/bi';
 import { useDispatch } from 'react-redux';
 import { StudentModal } from '../../Features/Students/StudentModal';
 import { updateStudent } from '../../Reducer/studentSlice';
-import { StudentModal } from './StudentModal';
 
 export const EditStudent = ({ objectToShow }) => {
   const dispatch = useDispatch();
@@ -23,15 +22,9 @@ export const EditStudent = ({ objectToShow }) => {
 
   return (
     <div key={objectToShow.postID}>
-      <p>{objectToShow.name}</p>
-      <p> {objectToShow.age}</p>
-      <p>{objectToShow.grade}</p>
-      <p> {objectToShow.gender}</p>
-      <p>{objectToShow.attendance} </p>
-      <p>{objectToShow.percentage}</p>
-
-      <button onClick={openEditModal}>Update Details</button>
-
+      <button onClick={openEditModal}>
+        <BiEdit />
+      </button>
       <StudentModal
         modalIsOpen={editModal}
         closeModal={closeEditModal}

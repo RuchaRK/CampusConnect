@@ -3,7 +3,6 @@ import axios from 'axios';
 import * as React from 'react';
 import { useParams } from 'react-router';
 import { KeyValuePair } from '../../Components/KeyValuePair';
-import { useSelector } from 'react-redux';
 
 const MainContainer = styled.div`
   display: flex;
@@ -27,30 +26,30 @@ const DataContainer = styled.div`
   padding: 29px 66px;
 `;
 
-export const SingleTeacher = () => {
+export const SingleStudent = () => {
   const { id } = useParams();
-  const [singleTeacher, setSingleTeacher] = React.useState(null);
+  const [singleStudent, setSingleStudent] = React.useState(null);
 
-  const fetchATeacher = async (id) => {
-    const response = await axios.get(`/api/teachers/${id}`);
-    return setSingleTeacher(response.data?.teacher);
+  const fetchAStudent = async (id) => {
+    const response = await axios.get(`/api/students/${id}`);
+    return setSingleStudent(response.data?.studentDetails);
   };
 
   React.useEffect(() => {
-    fetchATeacher(id);
+    fetchAStudent(id);
   }, []);
-
-  console.log('Teacher to see', singleTeacher);
 
   return (
     <MainContainer>
       <Title>
-        <h2>{singleTeacher?.name}</h2>
+        <h2>{singleStudent?.name}</h2>
       </Title>
       <DataContainer>
-        <KeyValuePair keyText={'Subject'} valueText={singleTeacher?.subject} />
-        <KeyValuePair keyText={'Address'} valueText={singleTeacher?.address} />
-        <KeyValuePair keyText={'Contact'} valueText={singleTeacher?.contactNumber} />
+        <KeyValuePair keyText={'Age'} valueText={singleStudent?.age} />
+        <KeyValuePair keyText={'Grade'} valueText={singleStudent?.grade} />
+        <KeyValuePair keyText={'Gender'} valueText={singleStudent?.gender} />
+        <KeyValuePair keyText={'Attendance'} valueText={singleStudent?.attendance} />
+        <KeyValuePair keyText={'Percentage'} valueText={singleStudent?.percentage} />
       </DataContainer>
     </MainContainer>
   );
