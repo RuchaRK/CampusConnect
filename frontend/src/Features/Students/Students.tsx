@@ -1,23 +1,22 @@
 import * as React from 'react';
 import { AiOutlineDelete } from 'react-icons/ai';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Error } from '../../Components/Error';
+import { ListPage } from '../../Components/ListPage';
+import { Loader } from '../../Components/Loader';
+
+import { AiOutlineDelete } from 'react-icons/ai';
+import { addStudent, deleteStudent, Link } from 'react-router-dom';
 import { ListPage } from '../../Components/ListPage';
 import { addStudent, deleteStudent, fetchStudents } from '../../Reducer/studentSlice';
-import { StudentModal } from './StudentModal';
 import { EditStudent } from './EditStudent';
+import { StudentModal } from './StudentModal';
+import { addStudent } from '../../Reducer/studentSlice';
+import { StudentRow } from './StudentRow';
 
 export const Students = () => {
-  const state = useSelector((state) => state);
-  const { status, error, students } = useSelector((state) => state.students);
   const dispatch = useDispatch();
-
-  React.useEffect(() => {
-    if (status === 'idle') {
-      dispatch(fetchStudents());
-    }
-  }, [status, dispatch]);
-
+  const { status, error, students, wizardStatus } = useSelector((state) => state.students);
   const [modalIsOpen, setIsOpen] = React.useState(false);
 
   function openModal() {
@@ -28,13 +27,26 @@ export const Students = () => {
     setIsOpen(false);
   }
 
-  const addNewStudent = (studentData) => {
-    dispatch(addStudent(studentData));
+  const addTeacher = (teacherData) => {
+    dispatch(addStudent(teacherData));
   };
 
   const deleteStudentById = (id) => {
     dispatch(deleteStudent(id));
   };
+
+  React.useEffect(() => {
+    if (status === 'idle') {
+      dispatch(fetchStudents());
+    }
+  }, [status, dispatch]);
+
+  if (status === 'loading') {
+    return <Loader />;
+  }
+  if (error) {
+    return <Error />;
+  }
 
   return (
     <div>
@@ -64,6 +76,31 @@ export const Students = () => {
           handleSubmit={addNewStudent}
         />
       </div>
+      <ListPage
+        column={['name', 'age', 'grade', 'gender', 'attendance', 'percentage', '', '']}
+        data={students.map((student) => [
+          student.name,
+          student.age,
+          student.grade,
+          student.gender,
+          student.attendance,
+          student.percentage,
+          <EditStudent objectToShow={student} />,
+          <button onClick={() => deleteStudentById(student._id)}>
+            <AiOutlineDelete />
+          </button>
+        ])}
+        title="Lets start by burning some calories!!!"
+        description="Don't wish for a good body, work for it..."
+        image=""
+        openForm={openModal}
+      />
+      <StudentModal
+        modalIsOpen={modalIsOpen}
+        closeModal={closeModal}
+        handleSubmit={addTeacher}
+        initialState={{}}
+      />
     </div>
   );
 };
