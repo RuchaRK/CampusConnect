@@ -64,11 +64,14 @@ button {
     background-color: #ffffff;
   }
   a:hover {
-    color: #747bff;
+    color: #8A317C;
   }
   button {
     background-color: #f9f9f9;
   }
+}
+a{
+  color:#ec2c5a
 }
 
 * {

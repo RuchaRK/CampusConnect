@@ -12,6 +12,7 @@ const MainContainer = styled.div`
   height: 100%;
   margin: 32px;
   gap: 24px;
+  background: url(/images/school.svg) no-repeat center;
 `;
 
 const InfoCard = styled.div`
@@ -30,6 +31,9 @@ const Content = styled.div`
   display: flex;
   flex-direction: column;
   gap: 8px;
+`;
+const ContentTitle = styled.h5`
+  color: #ec2c5a;
 `;
 
 export const Dashboard = () => {
@@ -50,7 +54,7 @@ export const Dashboard = () => {
       <InfoCard>
         <PiStudent size={40} />
         <Content>
-          <h5>Total Students</h5>
+          <ContentTitle>Total Students</ContentTitle>
           <h5>{status === 'loading' ? 'loading...' : students.length}</h5>
         </Content>
       </InfoCard>
@@ -58,7 +62,7 @@ export const Dashboard = () => {
       <InfoCard>
         <FaMarker size={40} />
         <Content>
-          <h5>Average Attendace</h5>
+          <ContentTitle>Average Attendace</ContentTitle>
           <h5>
             {status === 'loading'
               ? 'loading...'
@@ -71,7 +75,7 @@ export const Dashboard = () => {
       <InfoCard>
         <TbPercentage size={40} />
         <Content>
-          <h5>Total Percentage</h5>
+          <ContentTitle>Total Percentage</ContentTitle>
           <h5>
             {status === 'loading'
               ? 'loading...'
@@ -84,7 +88,7 @@ export const Dashboard = () => {
       <InfoCard>
         <GiTrophy size={40} />
         <Content>
-          <h5>Topper</h5>
+          <ContentTitle>Topper</ContentTitle>
           <h5>{status === 'loading' ? 'loading...' : topper?.name ?? '--'}</h5>
         </Content>
       </InfoCard>

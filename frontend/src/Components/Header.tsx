@@ -25,8 +25,7 @@ export const Header = () => {
   return (
     <HeaderContainer>
       <Greetings>
-        <small>Good Morning</small>
-        <h4>Welcome Back!!!</h4>
+        <h2 style={{ color: '#ec2c5a' }}>Campus Connect</h2>
       </Greetings>
 
       <IconContainer>

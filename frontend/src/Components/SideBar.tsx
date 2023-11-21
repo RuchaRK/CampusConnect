@@ -1,8 +1,7 @@
 import styled from '@emotion/styled';
-import { TbTargetArrow } from 'react-icons/tb';
+import { BiLogOut } from 'react-icons/bi';
+import { PiChalkboardTeacherFill, PiStudentFill } from 'react-icons/pi';
 import { RiDashboardFill } from 'react-icons/ri';
-import { PiStudentFill, PiChalkboardTeacherFill } from 'react-icons/pi';
-import { BiLogOut, BiSolidNotepad } from 'react-icons/bi';
 import { NavLink } from 'react-router-dom';
 import { routeName } from '../App.routes';
 
@@ -22,7 +21,7 @@ const SideBarComponent = styled.div`
 `;
 
 const Header = styled.div`
-  color: #f97316;
+  color: #ec2c5a;
   border-bottom: 1px solid #cbd5e1;
   height: 100px;
   display: flex;
@@ -69,7 +68,7 @@ export const SideBar = () => {
     <SideBarComponent>
       <div style={{ display: 'flex', flexDirection: 'column', gap: '24px', width: '100%' }}>
         <Header>
-          <h1 style={{ fontSize: '18px' }}>CampusConnect</h1>
+          <img src="/images/logo.svg" height="200px" width="200px" />
         </Header>
 
         <PagesContainer>
@@ -79,7 +78,7 @@ export const SideBar = () => {
               style={({ isActive }) => {
                 return {
                   fontWeight: isActive ? 'bold' : '',
-                  color: isActive ? '#f97316' : 'black'
+                  color: isActive ? '#EC2C5A' : 'black'
                 };
               }}>
               <IconContainer>
