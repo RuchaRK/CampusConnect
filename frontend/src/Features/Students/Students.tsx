@@ -1,16 +1,19 @@
 import * as React from 'react';
 import { AiOutlineDelete } from 'react-icons/ai';
 import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { Error } from '../../Components/Error';
 import { ListPage } from '../../Components/ListPage';
 import { Loader } from '../../Components/Loader';
-import { Link } from 'react-router-dom';
 import { addStudent, deleteStudent, fetchStudents } from '../../Reducer/studentSlice';
 import { EditStudent } from './EditStudent';
 import { StudentModal } from './StudentModal';
 
 export const Students = () => {
   const dispatch = useDispatch();
+  const [sortDirection, setSortDirection] = React.useState({});
+  const [sortBy, setSortBy] = React.useState();
+  const [genderFilter, setGenderFilter] = React.useState('all');
   const { status, error, students, wizardStatus } = useSelector((state) => state.students);
   const [modalIsOpen, setIsOpen] = React.useState(false);
 
@@ -43,14 +46,90 @@ export const Students = () => {
     return <Error />;
   }
 
+  console.log('Sort by', sortBy);
+  console.log('Sort direction', sortDirection);
+
+  const sortedStudents = sortBy
+    ? [...students].sort((a, b) => {
+        if (sortBy === 'name') {
+          if (sortDirection.name === 'asc') {
+            return a.name - b.name ? 1 : -1;
+          } else {
+            return a.name - b.name ? -1 : 1;
+          }
+        } else {
+          if (sortDirection[sortBy] === 'asc') {
+            return a[sortBy] - b[sortBy];
+          } else {
+            return b[sortBy] - a[sortBy];
+          }
+        }
+      })
+    : students;
+
+  const filteredData = sortedStudents.filter((student) =>
+    genderFilter === 'all' ? student : student.gender === genderFilter
+  );
+  console.log('filteredData', filteredData);
+
   return (
     <div>
       {status === 'loading' && <p>Loading...</p>}
       {error && <p>Something is wrong {error}</p>}
+
       <div>
         <ListPage
-          column={['Name', 'Age', 'Grade', 'Percentage']}
-          data={students.map((student) => [
+          column={[
+            {
+              name: 'Name',
+              isSortable: true,
+              sortDirection: sortDirection.name,
+              onClick: () => {
+                setSortBy('name');
+                setSortDirection({
+                  ...sortDirection,
+                  name: sortDirection.name === 'asc' ? 'desc' : 'asc'
+                });
+              }
+            },
+            {
+              name: 'Age',
+              isSortable: true,
+              sortDirection: sortDirection.age,
+              onClick: () => {
+                setSortBy('age');
+                setSortDirection({
+                  ...sortDirection,
+                  age: sortDirection.age === 'asc' ? 'desc' : 'asc'
+                });
+              }
+            },
+            {
+              name: 'Grade',
+              isSortable: true,
+              sortDirection: sortDirection.grade,
+              onClick: () => {
+                setSortBy('grade');
+                setSortDirection({
+                  ...sortDirection,
+                  grade: sortDirection.grade === 'asc' ? 'desc' : 'asc'
+                });
+              }
+            },
+            {
+              name: 'Percentage',
+              isSortable: true,
+              sortDirection: sortDirection.percentage,
+              onClick: () => {
+                setSortBy('percentage');
+                setSortDirection({
+                  ...sortDirection,
+                  percentage: sortDirection.percentage === 'asc' ? 'desc' : 'asc'
+                });
+              }
+            }
+          ]}
+          data={filteredData.map((student) => [
             <Link to={student._id}>{student.name}</Link>,
             student.age,
             student.grade,
@@ -60,6 +139,16 @@ export const Students = () => {
               <AiOutlineDelete />
             </button>
           ])}
+          filter={
+            <>
+              <h4> Select Gender :</h4>
+              <select name="gender" onClick={(event) => setGenderFilter(event.target.value)}>
+                <option value="all"> All</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+              </select>
+            </>
+          }
           title="Students"
           description=""
           image=""

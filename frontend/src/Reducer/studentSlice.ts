@@ -40,13 +40,12 @@ export const studentSlice = createSlice({
       state.status = 'loading';
     },
     [fetchStudents.fulfilled]: (state, action) => {
-      console.log(action);
       state.status = 'success';
       state.students = action.payload;
     },
     [fetchStudents.rejected]: (state, action) => {
       state.status = 'error';
-      console.log(action.error.message);
+
       state.error = action.error.message;
     },
     [addStudent.pending]: (state) => {

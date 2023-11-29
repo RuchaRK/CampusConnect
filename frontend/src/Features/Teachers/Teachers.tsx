@@ -49,7 +49,12 @@ export const Teachers = () => {
       {error && <p>Something is wrong {error}</p>}
       <div>
         <ListPage
-          column={['Name', 'Subject', 'Contact Number', 'Address']}
+          column={[
+            { name: 'Name', isSortable: false },
+            { name: 'Subject', isSortable: false },
+            { name: 'Contact', isSortable: false },
+            { name: 'Address', isSortable: false }
+          ]}
           data={teachers.map((teacher) => [
             <Link to={teacher._id}>{teacher.name}</Link>,
             teacher.subject,

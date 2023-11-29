@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import { MdOutlineArrowDropUp, MdOutlineArrowDropDown } from 'react-icons/md';
 
 const ListContainer = styled.div`
   display: flex;
@@ -76,31 +77,57 @@ const Button = styled.button`
   width: fit-content;
 `;
 
-export const ListPage = ({ column, data, title, description, image, openForm }) => {
+const IconTextContainer = styled.div`
+  display: flex;
+  gap: 8px;
+  align-items: center;
+`;
+
+const FilterSection = styled.div`
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 0px 8px;
+  width: 100%;
+`;
+
+export const ListPage = ({ column, data, filter, title, description, image, openForm }) => {
   return (
     <ListContainer>
       <FirstSection img={image}>
         <HeaderTextContainer>
           <div>
             <Title>{title}</Title>
-            <Description>{description}</Description>
+            {description && <Description>{description}</Description>}
           </div>
 
           <Button onClick={openForm}>Add New </Button>
         </HeaderTextContainer>
       </FirstSection>
+      <FilterSection> {filter}</FilterSection>
       <SecondSection>
         <Table>
           <HeaderRow>
             {column.map((header) => (
-              <ColumnHeading>{header}</ColumnHeading>
+              <ColumnHeading onClick={header.onClick}>
+                <IconTextContainer>
+                  {header.name}
+                  {header.isSortable ? (
+                    header.sortDirection === 'asc' ? (
+                      <MdOutlineArrowDropUp size={35} />
+                    ) : (
+                      <MdOutlineArrowDropDown size={35} />
+                    )
+                  ) : null}
+                </IconTextContainer>
+              </ColumnHeading>
             ))}
           </HeaderRow>
-
           {data.map((row) => (
             <ContentRow>
               {row.map((x) => (
-                <Content> {x}</Content>
+                <Content>{x}</Content>
               ))}
             </ContentRow>
           ))}
