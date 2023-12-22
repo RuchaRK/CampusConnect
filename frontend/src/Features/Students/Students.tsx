@@ -13,6 +13,10 @@ import styled from '@emotion/styled';
 const FilterContainer = styled.div`
   display: flex;
   gap: 8px;
+  align-items: center;
+  & + & {
+    margin-left: 16px;
+  }
 `;
 
 export const Students = () => {
