@@ -64,18 +64,22 @@ button {
     background-color: #ffffff;
   }
   a:hover {
-    color: #8A317C;
+    color: #8a317c;
   }
   button {
     background-color: #f9f9f9;
   }
 }
-a{
-  color:#ec2c5a
+a {
+  color: #ec2c5a;
 }
 
 * {
   margin: 0px;
   padding: 0px;
   box-sizing: border-box;
+}
+
+select {
+  height: 36px;
 }

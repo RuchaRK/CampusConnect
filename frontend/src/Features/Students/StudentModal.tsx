@@ -44,10 +44,10 @@ export const StudentModal = ({ modalIsOpen, closeModal, handleSubmit, initialSta
                 type="radio"
                 name="gender"
                 value="Female"
-                checked={formInput ?? formInput.gender === 'Female'}
+                checked={formInput.gender === 'Female'}
                 onChange={(event) => saveFormDetails(event)}
               />
-              Male
+              Female
             </div>
             <div
               style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: '8px' }}>
@@ -55,19 +55,23 @@ export const StudentModal = ({ modalIsOpen, closeModal, handleSubmit, initialSta
                 type="radio"
                 name="gender"
                 value="Male"
-                checked={formInput ?? formInput.gender === 'Male'}
+                checked={formInput.gender === 'Male'}
                 onChange={(event) => saveFormDetails(event)}
               />
-              Female
+              Male
             </div>
           </div>
           Grade:
-          <Input
-            type="number"
-            name="grade"
-            value={formInput.grade}
-            onChange={(event) => saveFormDetails(event)}
-          />
+          <select name="grade" onChange={(event) => saveFormDetails(event)}>
+            <option disabled selected>
+              Select Grade
+            </option>
+            {Array.from({ length: 12 }, (_, i) => i + 1).map((i) => (
+              <option value={i} selected={i === formInput.grade}>
+                {i}
+              </option>
+            ))}
+          </select>
           Attendance:
           <Input
             type="number"

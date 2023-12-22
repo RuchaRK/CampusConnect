@@ -8,12 +8,19 @@ import { Loader } from '../../Components/Loader';
 import { addStudent, deleteStudent, fetchStudents } from '../../Reducer/studentSlice';
 import { EditStudent } from './EditStudent';
 import { StudentModal } from './StudentModal';
+import styled from '@emotion/styled';
+
+const FilterContainer = styled.div`
+  display: flex;
+  gap: 8px;
+`;
 
 export const Students = () => {
   const dispatch = useDispatch();
   const [sortDirection, setSortDirection] = React.useState({});
   const [sortBy, setSortBy] = React.useState();
   const [genderFilter, setGenderFilter] = React.useState('all');
+  const [selectedGrade, setSelectedGrade] = React.useState('all');
   const { status, error, students, wizardStatus } = useSelector((state) => state.students);
   const [modalIsOpen, setIsOpen] = React.useState(false);
 
@@ -67,9 +74,9 @@ export const Students = () => {
       })
     : students;
 
-  const filteredData = sortedStudents.filter((student) =>
-    genderFilter === 'all' ? student : student.gender === genderFilter
-  );
+  const filteredData = sortedStudents
+    .filter((student) => (genderFilter === 'all' ? true : student.gender === genderFilter))
+    .filter((student) => (selectedGrade === 'all' ? true : student.grade == selectedGrade));
   console.log('filteredData', filteredData);
 
   return (
@@ -141,12 +148,23 @@ export const Students = () => {
           ])}
           filter={
             <>
-              <h4> Select Gender :</h4>
-              <select name="gender" onClick={(event) => setGenderFilter(event.target.value)}>
-                <option value="all"> All</option>
-                <option value="Male">Male</option>
-                <option value="Female">Female</option>
-              </select>
+              <FilterContainer>
+                <h4>Grade </h4>
+                <select name="grade" onChange={(event) => setSelectedGrade(event.target.value)}>
+                  <option value="all">All</option>
+                  {Array.from({ length: 12 }, (_, i) => i + 1).map((i) => (
+                    <option value={i}>{i}</option>
+                  ))}
+                </select>
+              </FilterContainer>
+              <FilterContainer>
+                <h4>Gender </h4>
+                <select name="gender" onChange={(event) => setGenderFilter(event.target.value)}>
+                  <option value="all"> All</option>
+                  <option value="Male">Male</option>
+                  <option value="Female">Female</option>
+                </select>
+              </FilterContainer>
             </>
           }
           title="Students"
